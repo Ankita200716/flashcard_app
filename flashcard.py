@@ -9,25 +9,31 @@ cards = {
 questions = list(cards.items())
 random.shuffle(questions)
 
-score = 0
-missed = []
+def run_quiz(card_list):
+    random.shuffle(card_list)
+    score = 0
+    missed = []
+    for question, answer in questions:
+      print("\nQ:", question)
+      input("Press Enter to reveal the answer...")
+      
+      result = input("Were you correct? (y/n): ")
+      if result.lower() == "y":
+         score = score + 1
+      else:
+         missed.append((question, answer))
 
-for question, answer in questions:
-    print("\nQ:", question)
-    input("Press Enter to reveal the answer...")
-    print("A:", answer)
-    
-    result = input("Were you correct? (y/n): ")
-    if result == "y":
-        score = score + 1
-    else:
-        missed.append(question)
+    print("\nYou got", score, "out of", len(questions))
+    return missed
 
-print("\nYou got", score, "out of", len(questions))
+questions = list(cards.items())
+missed = run_quiz(questions)
 
-if len(missed) > 0:
-    print("Cards to review:")
-    for card in missed:
-        print("-", card)
-else:
-    print("Perfect score!")
+while len(missed) > 0:
+    again = input("\nReview missed cards? (y/n): ")
+    if again.lower() != "y":
+        break
+    missed = run_quiz(missed)
+
+if len(missed) == 0:
+    print("\nPerfect! You know all the cards.")
