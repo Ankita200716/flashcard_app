@@ -1,0 +1,5 @@
+{ 
+    "Differentiate x^3":"3x^2",
+    "Differentiate ln(x)": "1/x",
+    "Differentiate sin(x)": "cos(x)"
+}
